@@ -1,0 +1,104 @@
+---
+import logo from '../assets/logo.png';
+import BotonWhatsapp from './ui/BotonWhatsapp.astro';
+
+const enlaces = [
+  { href: '#servicios', texto: 'Servicios' },
+  { href: '#como-funciona', texto: 'Cómo funciona' },
+  { href: '#destinos', texto: 'Destinos' },
+  { href: '#faq', texto: 'Preguntas' },
+];
+---
+<header
+  id="header"
+  class="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-white/85 backdrop-blur-md transition-all duration-300"
+>
+  <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
+    <a href="/" class="shrink-0">
+      <img src={logo.src} alt="El Rayo Logistic" class="h-10 w-auto" />
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex">
+      {enlaces.map((e) => (
+        <a
+          href={e.href}
+          class="relative text-sm font-medium text-pizarra transition-colors hover:text-carbon after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:bg-rayo after:transition-all after:duration-300 hover:after:w-full"
+        >
+          {e.texto}
+        </a>
+      ))}
+    </nav>
+
+    <div class="hidden lg:block">
+      <BotonWhatsapp mensaje="Hola, quiero cotizar un envío desde Lima." texto="Cotizar" />
+    </div>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="menu-movil"
+      class="flex h-10 w-10 items-center justify-center rounded-lg text-carbon lg:hidden"
+    >
+      <svg id="icono-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
+        <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/>
+      </svg>
+      <svg id="icono-cerrar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden h-6 w-6">
+        <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div id="menu-movil" class="hidden border-t border-hairline bg-white lg:hidden">
+    <nav class="flex flex-col px-5 py-4">
+      {enlaces.map((e) => (
+        <a href={e.href} class="border-b border-hairline py-3.5 text-base font-medium text-carbon last:border-0">
+          {e.texto}
+        </a>
+      ))}
+      <BotonWhatsapp
+        mensaje="Hola, quiero cotizar un envío desde Lima."
+        clase="mt-4 justify-center w-full"
+      />
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('header');
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('menu-movil');
+  const abrir = document.getElementById('icono-abrir');
+  const cerrar = document.getElementById('icono-cerrar');
+
+  const alScrollear = () => {
+    const activo = window.scrollY > 10;
+    header?.classList.toggle('border-hairline', activo);
+    header?.classList.toggle('shadow-sm', activo);
+  };
+
+  alScrollear();
+  window.addEventListener('scroll', alScrollear, { passive: true });
+
+  const cerrarMenu = () => {
+    menu?.classList.add('hidden');
+    abrir?.classList.remove('hidden');
+    cerrar?.classList.add('hidden');
+    toggle?.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle?.addEventListener('click', () => {
+    const abierto = !menu?.classList.contains('hidden');
+    if (abierto) {
+      cerrarMenu();
+    } else {
+      menu?.classList.remove('hidden');
+      abrir?.classList.add('hidden');
+      cerrar?.classList.remove('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', cerrarMenu));
+</script>
