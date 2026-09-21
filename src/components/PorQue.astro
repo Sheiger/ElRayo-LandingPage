@@ -1,0 +1,83 @@
+---
+const comparacion = [
+  {
+    solo: 'Cruzas Lima cargando tu encomienda hasta la agencia',
+    rayo: 'Pasamos a recogerla por tu casa u oficina',
+  },
+  {
+    solo: 'Consigues cajas y materiales, y la embalas tú',
+    rayo: 'El embalaje lo hacemos nosotros',
+  },
+  {
+    solo: 'Haces cola en ventanilla para despacharla',
+    rayo: 'Nos escribes por WhatsApp y nos encargamos',
+  },
+  {
+    solo: 'Averiguas qué agencia llega a tu ciudad',
+    rayo: 'Elegimos la ruta que mejor llega a tu destino',
+  },
+  {
+    solo: 'Si compras en Lima desde provincia, necesitas a alguien que lo reciba',
+    rayo: 'Recibimos tu compra, la revisamos y te la enviamos',
+  },
+];
+---
+<section id="por-que" class="bg-white py-20 lg:py-28">
+  <div class="mx-auto max-w-5xl px-5 lg:px-8">
+
+    <div class="mx-auto max-w-2xl text-center">
+      <span data-reveal class="inline-flex items-center gap-3 text-sm font-semibold tracking-wide text-pizarra uppercase">
+        <span class="h-0.5 w-8 bg-rayo"></span>
+        Por qué El Rayo
+        <span class="h-0.5 w-8 bg-rayo"></span>
+      </span>
+      <h2 data-reveal data-delay="0.05" class="mt-4 font-display text-3xl font-bold text-carbon sm:text-4xl lg:text-5xl">
+        Mandar una encomienda no debería costarte el día
+      </h2>
+      <p data-reveal data-delay="0.1" class="mt-4 text-lg leading-relaxed text-pizarra">
+        Somos una empresa pequeña, y eso juega a tu favor: tratas siempre
+        con las mismas personas, de principio a fin.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-5 lg:grid-cols-2 lg:grid-rows-[auto_repeat(5,auto)] lg:gap-x-6 lg:gap-y-4">
+
+      <div data-reveal class="rounded-2xl bg-humo p-7 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:p-9">
+        <h3 class="font-display text-lg font-semibold text-pizarra lg:pb-2">Por tu cuenta</h3>
+        <ul class="mt-6 space-y-4 lg:row-span-5 lg:mt-0 lg:grid lg:grid-rows-subgrid lg:space-y-0">
+          {comparacion.map((c) => (
+            <li class="flex items-start gap-3 text-pizarra">
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-hairline">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" class="h-3 w-3" aria-hidden="true">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              </span>
+              <span>{c.solo}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div
+        data-reveal
+        data-delay="0.15"
+        class="rounded-2xl border-2 border-rayo bg-white p-7 shadow-xl shadow-rayo/10 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:p-9"
+      >
+        <h3 class="font-display text-lg font-semibold text-carbon lg:pb-2">Con El Rayo</h3>
+        <ul class="mt-6 space-y-4 lg:row-span-5 lg:mt-0 lg:grid lg:grid-rows-subgrid lg:space-y-0">
+          {comparacion.map((c, i) => (
+            <li data-reveal data-delay={0.3 + i * 0.1} class="flex items-start gap-3 font-medium text-carbon">
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rayo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </span>
+              <span>{c.rayo}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
