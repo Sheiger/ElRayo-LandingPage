@@ -59,7 +59,7 @@ const secundarios = [
         data-reveal
         class="group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-white transition-shadow duration-300 hover:shadow-lg lg:row-span-2"
       >
-        <div data-carrusel class="relative aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-0 lg:flex-1">
+        <div data-carrusel class="relative aspect-16/10 overflow-hidden lg:aspect-auto lg:min-h-0 lg:flex-1">
           {fotos.map((f, i) => (
             <Image
               src={f.src}
@@ -85,7 +85,7 @@ const secundarios = [
                   aria-current={i === 0 ? 'true' : undefined}
                   class="group/punto flex h-6 items-center px-1"
                 >
-                  <span class="block h-1.5 w-1.5 rounded-full bg-white/60 transition-all duration-300 group-aria-[current=true]/punto:w-5 group-aria-[current=true]/punto:bg-white"></span>
+                  <span class="block h-1.5 w-1.5 rounded-full bg-white/60 transition-all duration-300 group-aria-current/punto:w-5 group-aria-current/punto:bg-white"></span>
                 </button>
               ))}
             </div>

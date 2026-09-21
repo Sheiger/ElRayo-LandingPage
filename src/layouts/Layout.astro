@@ -3,11 +3,29 @@ import '../styles/global.css';
 import { Font } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+  imagen?: string;
+}
+
+const {
+  titulo = 'El Rayo Logistic | Envíos de encomiendas desde Lima a todo el Perú',
+  descripcion = 'Recogemos tu carga a domicilio, la embalamos y la enviamos desde Lima a más de 70 ciudades del Perú. Cotiza por WhatsApp.',
+  imagen = '/og.jpg',
+} = Astro.props;
+
+const canonica = new URL(Astro.url.pathname, Astro.site);
+const imagenAbsoluta = new URL(imagen, Astro.site);
 ---
 
 
-<html lang="es">
+<html lang="es-PE">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
     <script is:inline>
       document.documentElement.classList.add('js');
       setTimeout(() => {
@@ -16,11 +34,23 @@ import Footer from '../components/Footer.astro';
         }
       }, 3000);
     </script>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <title>ElRayoLogisticSAC</title>
+   
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonica} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:image" content={imagenAbsoluta} />
+    <meta property="og:url" content={canonica} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#F6C700" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
     <Font cssVariable="--font-outfit" preload />
     <Font cssVariable="--font-inter" preload />
   </head>
