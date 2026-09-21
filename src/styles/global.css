@@ -8,9 +8,27 @@
   --color-pizarra: #3F4650;
   --color-hairline: #E7E9EC;
   --color-whatsapp: #25D366;
+  --color-humo: #F7F7F5;
 
   --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-entrar: entrar 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--retraso, 0ms) both;
+  --animate-bloque: bloque 0.8s cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+  --animate-subrayar: subrayar 0.6s cubic-bezier(0.22, 1, 0.36, 1) 600ms both;
+
+  @keyframes entrar {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes bloque {
+    from { opacity: 0; transform: translate(-12px, 12px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes subrayar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
 }
 
 @layer base {
@@ -34,6 +52,12 @@
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
   }
 }
 
