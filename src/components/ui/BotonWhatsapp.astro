@@ -4,15 +4,33 @@ import { linkWhatsapp } from '../../data/empresa';
 interface Props {
   mensaje?: string;
   texto?: string;
+  variante?: 'amarillo' | 'oscuro';
+  tamano?: 'md' | 'lg';
   clase?: string;
 }
 
-const { mensaje, texto = 'Cotizar por WhatsApp', clase = '' } = Astro.props;
+const {
+  mensaje,
+  texto = 'Cotizar por WhatsApp',
+  variante = 'amarillo',
+  tamano = 'md',
+  clase = '',
+} = Astro.props;
+
+const variantes = {
+  amarillo: 'bg-rayo text-carbon hover:bg-rayo-deep',
+  oscuro: 'bg-carbon text-white hover:bg-black',
+};
+
+const tamanos = {
+  md: 'px-5 py-3 text-sm',
+  lg: 'px-6 py-3.5 text-base',
+};
 ---
 <a href={linkWhatsapp(mensaje)}
   target="_blank"
   rel="noopener noreferrer"
-  class={`inline-flex items-center gap-2 rounded-xl bg-rayo px-5 py-3 text-sm font-semibold text-carbon transition-all duration-200 hover:bg-rayo-deep hover:-translate-y-0.5 active:translate-y-0 ${clase}`}
+  class={`inline-flex items-center gap-2 rounded-xl font-semibold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 ${variantes[variante]} ${tamanos[tamano]} ${clase}`}
 >
   <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
     <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-1.99 1.37-.53.05-1.02.24-3.45-.72-2.9-1.14-4.73-4.1-4.87-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.37.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.65.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.41.29.14.45.12.62-.07.17-.19.71-.83.9-1.12.19-.29.38-.24.64-.14.26.09 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.69-.18 1.38Z"/>

@@ -1,0 +1,53 @@
+---
+import logo from '../assets/logo.png';
+import { empresa, linkWhatsapp, mapaUrl } from '../data/empresa';
+import { enlaces } from '../data/navegacion';
+
+const anio = new Date().getFullYear();
+const claseEnlace = 'text-white/70 transition-colors hover:text-rayo';
+---
+<footer class="bg-carbon text-white">
+  <div class="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[2fr_1fr_1fr] lg:px-8">
+    <div>
+      <img src={logo.src} alt={empresa.nombre} class="h-16 w-auto" />
+      <p class="mt-5 max-w-sm leading-relaxed text-white/60">
+        Recogemos, embalamos y enviamos tu carga desde Lima
+        a más de 70 ciudades del Perú.
+      </p>
+    </div>
+
+    <nav aria-label="Pie de página">
+      <p class="text-xs font-semibold tracking-wide text-white/50 uppercase">Navegación</p>
+      <ul class="mt-4 space-y-3">
+        {enlaces.map((e) => (
+          <li><a href={e.href} class={claseEnlace}>{e.texto}</a></li>
+        ))}
+        <li><a href="/#contacto" class={claseEnlace}>Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <p class="text-xs font-semibold tracking-wide text-white/50 uppercase">Contacto</p>
+      <ul class="mt-4 space-y-3">
+        <li>
+          <a href={linkWhatsapp()} target="_blank" rel="noopener noreferrer" class={claseEnlace}>
+            {empresa.telefono}
+          </a>
+        </li>
+        <li><a href={`mailto:${empresa.email}`} class={claseEnlace}>{empresa.email}</a></li>
+        <li>
+          <a href={mapaUrl} target="_blank" rel="noopener noreferrer" class={claseEnlace}>
+            {empresa.direccion}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-6 text-sm text-white/50 sm:flex-row sm:justify-between lg:px-8">
+      <p>© {anio} {empresa.razonSocial}. Todos los derechos reservados.</p>
+      <p>RUC {empresa.ruc}</p>
+    </div>
+  </div>
+</footer>

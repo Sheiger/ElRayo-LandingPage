@@ -1,0 +1,63 @@
+---
+import { empresa, linkWhatsapp, mapaUrl } from '../data/empresa';
+import BotonWhatsapp from './ui/BotonWhatsapp.astro';
+
+const datos = [
+  { etiqueta: 'WhatsApp', valor: empresa.telefono, href: linkWhatsapp(), externo: true },
+  { etiqueta: 'Oficina', valor: empresa.direccion, href: mapaUrl, externo: true },
+  { etiqueta: 'Horario', valor: empresa.horario },
+  { etiqueta: 'Correo', valor: empresa.email, href: `mailto:${empresa.email}` },
+];
+---
+<section id="contacto" class="relative overflow-hidden bg-rayo py-20 lg:py-28">
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-16 -right-24 h-[28rem] w-[28rem] rotate-12 text-carbon/5 lg:h-[40rem] lg:w-[40rem]"
+  >
+    <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+  </svg>
+
+  <div class="relative mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 data-reveal class="font-display text-4xl font-bold text-carbon sm:text-5xl lg:text-6xl">
+        ¿Listo para enviar tu carga?
+      </h2>
+      <p data-reveal data-delay="0.05" class="mt-5 text-lg leading-relaxed text-carbon/80 lg:text-xl">
+        Escríbenos por WhatsApp con qué envías y a qué ciudad.
+        Te respondemos con tu cotización.
+      </p>
+      <div data-reveal data-delay="0.1" class="mt-8">
+        <BotonWhatsapp
+          variante="oscuro"
+          tamano="lg"
+          texto="Cotizar ahora"
+          mensaje="Hola, quiero cotizar un envío desde Lima."
+        />
+      </div>
+    </div>
+
+    <dl data-reveal data-delay="0.15" class="mt-16 grid gap-8 border-t border-carbon/15 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+      {datos.map((d) => (
+        <div>
+          <dt class="text-xs font-semibold tracking-wide text-carbon/70 uppercase">{d.etiqueta}</dt>
+          <dd class="mt-2 font-medium text-carbon">
+            {d.href ? (
+              <a
+                href={d.href}
+                target={d.externo ? '_blank' : undefined}
+                rel={d.externo ? 'noopener noreferrer' : undefined}
+                class="underline decoration-carbon/30 underline-offset-4 transition-colors hover:decoration-carbon"
+              >
+                {d.valor}
+              </a>
+            ) : (
+              d.valor
+            )}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
