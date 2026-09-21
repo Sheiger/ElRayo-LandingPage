@@ -1,0 +1,46 @@
+---
+import { preguntas } from '../data/faq';
+import BotonWhatsapp from './ui/BotonWhatsapp.astro';
+---
+<section id="faq" class="bg-humo py-20 lg:py-28">
+  <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[2fr_3fr] lg:gap-16 lg:px-8">
+
+    <div class="lg:sticky lg:top-28 lg:self-start">
+      <span data-reveal class="flex items-center gap-3 text-sm font-semibold tracking-wide text-pizarra uppercase">
+        <span class="h-0.5 w-8 bg-rayo"></span>
+        Preguntas frecuentes
+      </span>
+      <h2 data-reveal data-delay="0.05" class="mt-4 font-display text-3xl font-bold text-carbon sm:text-4xl lg:text-5xl">
+        Lo que todos nos preguntan
+      </h2>
+      <p data-reveal data-delay="0.1" class="mt-4 text-lg leading-relaxed text-pizarra">
+        ¿Tu duda no está aquí? Escríbenos y te respondemos directamente.
+      </p>
+      <div data-reveal data-delay="0.15" class="mt-8">
+        <BotonWhatsapp mensaje="Hola, tengo una consulta sobre un envío." texto="Hacer una consulta" />
+      </div>
+    </div>
+
+    <div class="space-y-3">
+      {preguntas.map((p, i) => (
+        <details
+          name="faq"
+          data-reveal
+          data-delay={i * 0.05}
+          class="group rounded-xl border border-hairline bg-white transition-colors open:border-rayo"
+        >
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-display font-semibold text-carbon [&::-webkit-details-marker]:hidden">
+            {p.pregunta}
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-rayo-mist transition-transform duration-300 group-open:rotate-45 group-open:bg-rayo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" class="h-4 w-4" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </span>
+          </summary>
+          <p class="px-6 pb-6 leading-relaxed text-pizarra">{p.respuesta}</p>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>
