@@ -7,6 +7,7 @@ export const empresa = {
   email: 'el.rayo.logistic@gmail.com',
   direccion: 'Calle C, Mz G43 lt1, Bocanegra S5',
   horario: 'Lunes a sábado, 8:00 a.m. – 7:00 p.m.',
+  libroReclamaciones: 'https://...', // el enlace que te dé el proveedor
 };
 
 export function linkWhatsapp(mensaje = 'Hola, quiero cotizar un envío desde Lima.') {
@@ -14,3 +15,4 @@ export function linkWhatsapp(mensaje = 'Hola, quiero cotizar un envío desde Lim
 }
 
 export const mapaUrl = `https://maps.app.goo.gl/KpX7ZYxUuERuHt3m8`;
+

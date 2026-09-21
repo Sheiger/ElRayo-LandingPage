@@ -2,14 +2,16 @@
 import logo from '../assets/logo.png';
 import { empresa, linkWhatsapp, mapaUrl } from '../data/empresa';
 import { enlaces } from '../data/navegacion';
+import { Image } from 'astro:assets';
+import libro from '../assets/libro-de-reclamaciones.jpg';
 
 const anio = new Date().getFullYear();
 const claseEnlace = 'text-white/70 transition-colors hover:text-rayo';
 ---
 <footer class="bg-carbon text-white">
-  <div class="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[2fr_1fr_1fr] lg:px-8">
+  <div class="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[1fr_1fr_1fr_1fr] lg:px-8">
     <div>
-      <img src={logo.src} alt={empresa.nombre} class="h-16 w-auto" />
+      <img src={logo.src} alt={empresa.nombre} class="h-18 w-18 rounded-full object-cover" />
       <p class="mt-5 max-w-sm leading-relaxed text-white/60">
         Recogemos, embalamos y enviamos tu carga desde Lima
         a más de 70 ciudades del Perú.
@@ -42,6 +44,19 @@ const claseEnlace = 'text-white/70 transition-colors hover:text-rayo';
         </li>
       </ul>
     </div>
+
+    <div>
+      <p class="text-xs font-semibold tracking-wide text-white/50 uppercase mb-4">Reclamos</p>
+      <a
+        href={empresa.libroReclamaciones}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex self-start rounded-lg bg-white p-2 transition-opacity hover:opacity-90 sm:self-auto"
+      >
+        <Image src={libro} alt="Libro de Reclamaciones" class="h-18 w-auto" />
+      </a>
+    </div>
+    
   </div>
 
   <div class="border-t border-white/10">

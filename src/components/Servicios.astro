@@ -1,7 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import embalaje from '../assets/embalaje.jpg';
 import { linkWhatsapp } from '../data/empresa';
+import embalaje from '../assets/servicios/embalaje.jpg';
+import embaleje1 from '../assets/servicios/embalaje1.jpg';
+import carga from '../assets/servicios/carga.jpg';
+import carga1 from '../assets/servicios/carga1.jpg';
+
+const fotos = [
+  { src: embalaje, alt: 'Encomienda siendo embalada por el equipo de El Rayo Logistic' },
+  { src: embaleje1, alt: 'Carga embalada lista para su envío' },
+  { src: carga, alt: 'Furgoneta de El Rayo Logistic recogiendo una encomienda' },
+  { src: carga1, alt: 'Furgoneta de El Rayo Logistic recogiendo una encomienda' },
+];
 
 const iconos = {
   bolsa: 'M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z M3 6h18 M16 10a4 4 0 0 1-8 0',
@@ -49,13 +59,38 @@ const secundarios = [
         data-reveal
         class="group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-white transition-shadow duration-300 hover:shadow-lg lg:row-span-2"
       >
-        <Image
-          src={embalaje}
-          alt="Encomienda siendo embalada por el equipo de El Rayo Logistic"
-          widths={[400, 700]}
-          sizes="(max-width: 1024px) 100vw, 33vw"
-          class="aspect-16/10 w-full object-cover lg:aspect-auto lg:min-h-0 lg:flex-1"
-        />
+        <div data-carrusel class="relative aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-0 lg:flex-1">
+          {fotos.map((f, i) => (
+            <Image
+              src={f.src}
+              alt={f.alt}
+              widths={[400, 700]}
+              sizes="(max-width: 1024px) 100vw, 33vw"
+              data-slide
+              aria-hidden={i === 0 ? undefined : 'true'}
+              class:list={[
+                'absolute inset-0 h-full w-full object-cover transition-opacity duration-700',
+                i === 0 ? 'opacity-100' : 'opacity-0',
+              ]}
+            />
+          ))}
+
+          {fotos.length > 1 && (
+            <div class="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1 rounded-full bg-carbon/40 px-2 backdrop-blur-sm">
+              {fotos.map((_, i) => (
+                <button
+                  type="button"
+                  data-punto={i}
+                  aria-label={`Ver foto ${i + 1} de ${fotos.length}`}
+                  aria-current={i === 0 ? 'true' : undefined}
+                  class="group/punto flex h-6 items-center px-1"
+                >
+                  <span class="block h-1.5 w-1.5 rounded-full bg-white/60 transition-all duration-300 group-aria-[current=true]/punto:w-5 group-aria-[current=true]/punto:bg-white"></span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
         <div class="p-7">
           <span class="inline-block rounded-full bg-rayo px-3 py-1 text-xs font-semibold text-carbon">
             Servicio principal
@@ -141,3 +176,64 @@ const secundarios = [
     </div>
   </div>
 </section>
+
+<script>
+  const carruseles = document.querySelectorAll<HTMLElement>('[data-carrusel]');
+
+  carruseles.forEach((carrusel) => {
+    const slides = carrusel.querySelectorAll<HTMLImageElement>('[data-slide]');
+    const puntos = carrusel.querySelectorAll<HTMLButtonElement>('[data-punto]');
+    if (slides.length < 2) return;
+
+    let actual = 0;
+    let temporizador: number | undefined;
+    let visible = false;
+    let detenido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function mostrar(indice: number) {
+      slides[actual].classList.replace('opacity-100', 'opacity-0');
+      slides[actual].setAttribute('aria-hidden', 'true');
+      puntos[actual]?.removeAttribute('aria-current');
+
+      actual = indice;
+
+      slides[actual].classList.replace('opacity-0', 'opacity-100');
+      slides[actual].removeAttribute('aria-hidden');
+      puntos[actual]?.setAttribute('aria-current', 'true');
+    }
+
+    function iniciar() {
+      if (detenido || !visible || temporizador) return;
+      temporizador = window.setInterval(() => {
+        mostrar((actual + 1) % slides.length);
+      }, 4000);
+    }
+
+    function pausar() {
+      clearInterval(temporizador);
+      temporizador = undefined;
+    }
+
+    puntos.forEach((punto, i) => {
+      punto.addEventListener('click', () => {
+        detenido = true;
+        pausar();
+        mostrar(i);
+      });
+    });
+
+    carrusel.addEventListener('mouseenter', pausar);
+    carrusel.addEventListener('mouseleave', iniciar);
+
+    new IntersectionObserver(([entrada]) => {
+      visible = entrada.isIntersecting;
+      if (visible) iniciar();
+      else pausar();
+    }).observe(carrusel);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) pausar();
+      else iniciar();
+    });
+  });
+</script>
