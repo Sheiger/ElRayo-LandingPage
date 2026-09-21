@@ -17,4 +17,12 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     },
     { margin: '0px 0px -10% 0px' }
   );
+  
+  inView(
+  '[data-trazo]',
+  (el) => {
+    animate(el, { scaleX: [0, 1] }, { duration: 0.9, ease: [0.65, 0, 0.35, 1] });
+  },
+  { margin: '0px 0px -10% 0px' }
+);
 }

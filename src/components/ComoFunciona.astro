@@ -1,0 +1,73 @@
+---
+import BotonWhatsapp from './ui/BotonWhatsapp.astro';
+
+const pasos = [
+  {
+    titulo: 'Escríbenos por WhatsApp',
+    texto: 'Cuéntanos qué envías, a qué ciudad y desde qué distrito. Te respondemos con la cotización.',
+  },
+  {
+    titulo: 'Recogemos tu carga',
+    texto: 'Coordinamos el día y pasamos con nuestra furgoneta por tu casa u oficina.',
+  },
+  {
+    titulo: 'La embalamos',
+    texto: 'Preparamos el embalaje adecuado para que viaje protegida.',
+  },
+  {
+    titulo: 'Llega a su ciudad',
+    texto: 'Viaja por la ruta que mejor cubre tu ciudad y se recoge en la agencia de destino. En algunas ciudades, también a domicilio por un costo adicional.',
+  },
+];
+---
+<section id="como-funciona" class="bg-white py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+
+    <div class="mx-auto max-w-2xl text-center">
+      <span data-reveal class="inline-flex items-center gap-3 text-sm font-semibold tracking-wide text-pizarra uppercase">
+        <span class="h-0.5 w-8 bg-rayo"></span>
+        Cómo funciona
+        <span class="h-0.5 w-8 bg-rayo"></span>
+      </span>
+      <h2 data-reveal data-delay="0.05" class="mt-4 font-display text-3xl font-bold text-carbon sm:text-4xl lg:text-5xl">
+        Enviar con nosotros es así de simple
+      </h2>
+      <p data-reveal data-delay="0.1" class="mt-4 text-lg leading-relaxed text-pizarra">
+        Cuatro pasos, y el único que te toca a ti es el primero.
+      </p>
+    </div>
+
+    <div class="relative mt-16">
+      <div class="absolute top-7 bottom-7 left-7 w-0.5 bg-hairline lg:hidden" aria-hidden="true"></div>
+      <div class="absolute top-7 right-[12.5%] left-[12.5%] hidden h-0.5 bg-hairline lg:block" aria-hidden="true"></div>
+      <div data-trazo class="absolute top-7 right-[12.5%] left-[12.5%] hidden h-0.5 origin-left bg-rayo lg:block" aria-hidden="true"></div>
+
+      <ol class="relative grid gap-10 lg:grid-cols-4 lg:gap-8">
+        {pasos.map((p, i) => (
+          <li
+            data-reveal
+            data-delay={i * 0.25}
+            class="flex gap-5 lg:flex-col lg:items-center lg:text-center"
+          >
+            <span class="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-rayo font-display text-xl font-bold text-carbon ring-8 ring-white">
+              {i + 1}
+            </span>
+            <div class="pt-2 lg:pt-6">
+              <h3 class="font-display text-lg font-semibold text-carbon">{p.titulo}</h3>
+              <p class="mt-2 leading-relaxed text-pizarra lg:mx-auto lg:max-w-60">{p.texto}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <div data-reveal class="mt-14 flex justify-center">
+      <BotonWhatsapp
+        mensaje="Hola, quiero cotizar un envío desde Lima."
+        texto="Empezar por el paso 1"
+        clase="px-6 py-3.5 text-base"
+      />
+    </div>
+
+  </div>
+</section>

@@ -59,6 +59,9 @@
   .js [data-reveal] {
     opacity: 0;
   }
+  .js [data-trazo] {
+  transform: scaleX(0);
+}
 }
 
 html {
