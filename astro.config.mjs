@@ -24,6 +24,13 @@ export default defineConfig({
       weights: [400, 500, 600],
       subsets: ['latin'],
     },
+    {
+      name: 'Caveat',
+      cssVariable: '--font-caveat',
+      provider: fontProviders.google(),
+      weights: [600, 700],
+      subsets: ['latin'],
+    },
   ],
 
   vite: {

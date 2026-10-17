@@ -1,5 +1,6 @@
 ---
 import BotonWhatsapp from './ui/BotonWhatsapp.astro';
+import RayoFondo from './ui/RayoFondo.astro';
 
 const pasos = [
   {
@@ -20,8 +21,9 @@ const pasos = [
   },
 ];
 ---
-<section id="como-funciona" class="bg-white py-20 lg:py-28">
-  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+<section id="como-funciona" class="relative overflow-hidden bg-white py-20 lg:py-28">
+  <RayoFondo clase="-left-48 -bottom-24 h-[44rem] w-[44rem] -rotate-12 lg:h-[64rem] lg:w-[64rem]" />
+  <div class="relative mx-auto max-w-7xl px-5 lg:px-8">
 
     <div class="mx-auto max-w-2xl text-center">
       <span data-reveal class="inline-flex items-center gap-3 text-sm font-semibold tracking-wide text-pizarra uppercase">

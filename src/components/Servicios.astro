@@ -2,11 +2,13 @@
 import { Image } from 'astro:assets';
 import { servicios } from '../data/servicios';
 import { linkWhatsapp } from '../data/empresa';
+import RayoFondo from './ui/RayoFondo.astro';
 
 const atributos = ['Rápido', 'Seguro', 'Confiable'];
 ---
-<section id="servicios" class="bg-white py-20 lg:py-28">
-  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+<section id="servicios" class="relative overflow-hidden bg-white py-20 lg:py-28">
+  <RayoFondo clase="-right-40 -top-20 h-[48rem] w-[48rem] rotate-12 lg:h-[44rem] lg:w-[44rem]" />
+  <div class="relative mx-auto max-w-7xl px-5 lg:px-8">
 
     <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
       <div>
